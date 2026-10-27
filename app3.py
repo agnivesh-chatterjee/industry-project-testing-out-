@@ -677,25 +677,25 @@ PEOPLE = [
     {
         "name": "Dr. Sourish Das",
         "linkedin": "https://www.linkedin.com/in/sourish-cmi/",
-        "photo": "people/sourish_sir_potrait.jpeg",
+        "photo": "People/sourish_sir_potrait.jpeg",
         "initials": "SD",
     },
     {
         "name": "Agnivesh Chatterjee",
         "linkedin": "https://www.linkedin.com/in/agnivesh-chatterjee-135498229/",
-        "photo": "people/agnivesh_potrait.jpeg",
+        "photo": "People/agnivesh_potrait.jpeg",
         "initials": "AC",
     },
     {
         "name": "Anupam Dasgupta",
         "linkedin": "https://www.linkedin.com/in/anupam-dasgupta-080558225/",
-        "photo": "people/anupam_potrait.jpeg",
+        "photo": "People/anupam_potrait.jpeg",
         "initials": "AD",
     },
     {
         "name": "Aryan Srivastava",
         "linkedin": "https://www.linkedin.com/in/aryan-srivastava-8782ba171/",
-        "photo": "people/aryan_potrait.jpeg",
+        "photo": "People/aryan_potrait.jpeg",
         "initials": "AS",
     },
 ]
