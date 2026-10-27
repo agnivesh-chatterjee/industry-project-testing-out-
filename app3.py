@@ -677,92 +677,123 @@ PEOPLE = [
     {
         "name": "Dr. Sourish Das",
         "linkedin": "https://www.linkedin.com/in/sourish-cmi/",
-        "photo": "People/sourish_sir_potrait.jpeg",
+        "github": None,
+        "website": "https://www.cmi.ac.in/~sourish/",
+        "photo": "people/sourish_sir_potrait.jpeg",
         "initials": "SD",
     },
     {
         "name": "Agnivesh Chatterjee",
         "linkedin": "https://www.linkedin.com/in/agnivesh-chatterjee-135498229/",
-        "photo": "People/agnivesh_potrait.jpeg",
+        "github": "https://github.com/agnivesh-chatterjee",
+        "website": None,
+        "photo": "people/agnivesh_potrait.jpeg",
         "initials": "AC",
     },
     {
         "name": "Anupam Dasgupta",
         "linkedin": "https://www.linkedin.com/in/anupam-dasgupta-080558225/",
-        "photo": "People/anupam_potrait.jpeg",
+        "github": "https://github.com/Anupam-Dasgupta",
+        "website": None,
+        "photo": "people/anupam_potrait.jpeg",
         "initials": "AD",
     },
     {
         "name": "Aryan Srivastava",
         "linkedin": "https://www.linkedin.com/in/aryan-srivastava-8782ba171/",
-        "photo": "People/aryan_potrait.jpeg",
+        "github": "https://github.com/aryansrivvv",
+        "website": None,
+        "photo": "people/aryan_potrait.jpeg",
         "initials": "AS",
     },
 ]
+
 
 with tab_people:
     st.subheader("People")
     st.caption("Meet the people behind the project.")
 
-    linkedin_logo_path = Path(__file__).parent / "linkedinlogo.png"
+    # Load the logos from the script's directory
+    base_dir = Path(__file__).parent
+
+    linkedin_logo_path = base_dir / "linkedinlogo.png"
+    github_logo_path = base_dir / "githublogo.png"
+
+    linkedin_logo_src = None
+    github_logo_src = None
 
     if linkedin_logo_path.is_file():
         linkedin_logo_base64 = base64.b64encode(
             linkedin_logo_path.read_bytes()
         ).decode("utf-8")
-
         linkedin_logo_src = (
             f"data:image/png;base64,{linkedin_logo_base64}"
         )
-    else:
-        linkedin_logo_src = None
 
+    if github_logo_path.is_file():
+        github_logo_base64 = base64.b64encode(
+            github_logo_path.read_bytes()
+        ).decode("utf-8")
+        github_logo_src = (
+            f"data:image/png;base64,{github_logo_base64}"
+        )
+
+    # Styling for the logo links and website button
     st.markdown(
         """
         <style>
-        /* LinkedIn logo: no square background or border */
-        .linkedin-logo-link {
+        .profile-links {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: fit-content;
-            margin: 12px auto 0 auto;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .profile-logo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 0;
+            margin: 0;
             border: none;
             background: transparent;
             text-decoration: none;
+            line-height: 0;
             transition: transform 0.2s ease;
         }
 
-        .linkedin-logo-link:hover {
-            transform: scale(1.08);
+        .profile-logo-link:hover {
+            transform: scale(1.1);
         }
 
-        .linkedin-logo-link img {
+        .profile-logo-link img {
             display: block;
-            width: 64px;
-            height: auto;
-            max-height: 64px;
+            width: 42px;
+            height: 42px;
             object-fit: contain;
             border: none;
             border-radius: 0;
             box-shadow: none;
         }
 
-        /* Fix Streamlit expander arrow/text overlap */
-        [data-testid="stExpander"] summary {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .personal-website-button {
+            display: inline-block;
+            padding: 9px 14px;
+            border: 1px solid #1717B8;
+            border-radius: 6px;
+            background: #1717B8;
+            color: #FFFFFF !important;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: background 0.2s ease;
         }
 
-        [data-testid="stExpander"] summary p {
-            margin: 0 !important;
-            line-height: 1.5 !important;
-        }
-
-        [data-testid="stExpander"] summary svg {
-            flex-shrink: 0;
+        .personal-website-button:hover {
+            background: #101080;
+            border-color: #101080;
         }
         </style>
         """,
@@ -774,7 +805,9 @@ with tab_people:
     for col, person in zip(people_cols, PEOPLE):
         with col:
             with st.container(border=True):
-                photo_path = Path(__file__).parent / person["photo"]
+
+                # Profile photograph
+                photo_path = base_dir / person["photo"]
 
                 if photo_path.is_file():
                     st.image(
@@ -810,26 +843,64 @@ with tab_people:
 
                 st.markdown(f"**{person['name']}**")
 
-                if linkedin_logo_src:
-                    safe_name = html.escape(person["name"], quote=True)
+                # Build the profile links
+                profile_links = []
 
-                    st.markdown(
+                if linkedin_logo_src:
+                    profile_links.append(
                         f"""
-                        <a class="linkedin-logo-link"
-                           href="{person['linkedin']}"
+                        <a class="profile-logo-link"
+                           href="{html.escape(person['linkedin'], quote=True)}"
                            target="_blank"
                            rel="noopener noreferrer"
-                           aria-label="Open {safe_name}'s LinkedIn profile">
+                           aria-label="LinkedIn profile of {html.escape(person['name'], quote=True)}"
+                           title="LinkedIn">
                             <img src="{linkedin_logo_src}"
                                  alt="LinkedIn">
                         </a>
-                        """,
+                        """
+                    )
+
+                if person["github"] and github_logo_src:
+                    profile_links.append(
+                        f"""
+                        <a class="profile-logo-link"
+                           href="{html.escape(person['github'], quote=True)}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="GitHub profile of {html.escape(person['name'], quote=True)}"
+                           title="GitHub">
+                            <img src="{github_logo_src}"
+                                 alt="GitHub">
+                        </a>
+                        """
+                    )
+
+                if person["website"]:
+                    profile_links.append(
+                        f"""
+                        <a class="personal-website-button"
+                           href="{html.escape(person['website'], quote=True)}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Personal Website
+                        </a>
+                        """
+                    )
+
+                if profile_links:
+                    st.markdown(
+                        '<div class="profile-links">'
+                        + "".join(profile_links)
+                        + '</div>',
                         unsafe_allow_html=True,
                     )
-                else:
-                    st.warning(
-                        "Add linkedinlogo.png beside this Python script."
-                    )
+
+                if not linkedin_logo_src:
+                    st.caption("Add linkedinlogo.png beside this Python file.")
+
+                if person["github"] and not github_logo_src:
+                    st.caption("Add githublogo.png beside this Python file.")
 
 
 # =========================================================
