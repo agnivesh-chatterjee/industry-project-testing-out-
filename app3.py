@@ -679,7 +679,7 @@ PEOPLE = [
         "linkedin": "https://www.linkedin.com/in/sourish-cmi/",
         "github": None,
         "website": "https://www.cmi.ac.in/~sourish/",
-        "photo": "people/sourish_sir_potrait.jpeg",
+        "photo": "People/sourish_sir_potrait.jpeg",
         "initials": "SD",
     },
     {
@@ -687,7 +687,7 @@ PEOPLE = [
         "linkedin": "https://www.linkedin.com/in/agnivesh-chatterjee-135498229/",
         "github": "https://github.com/agnivesh-chatterjee",
         "website": None,
-        "photo": "people/agnivesh_potrait.jpeg",
+        "photo": "People/agnivesh_potrait.jpeg",
         "initials": "AC",
     },
     {
@@ -695,7 +695,7 @@ PEOPLE = [
         "linkedin": "https://www.linkedin.com/in/anupam-dasgupta-080558225/",
         "github": "https://github.com/Anupam-Dasgupta",
         "website": None,
-        "photo": "people/anupam_potrait.jpeg",
+        "photo": "People/anupam_potrait.jpeg",
         "initials": "AD",
     },
     {
@@ -703,7 +703,7 @@ PEOPLE = [
         "linkedin": "https://www.linkedin.com/in/aryan-srivastava-8782ba171/",
         "github": "https://github.com/aryansrivvv",
         "website": None,
-        "photo": "people/aryan_potrait.jpeg",
+        "photo": "People/aryan_potrait.jpeg",
         "initials": "AS",
     },
 ]
