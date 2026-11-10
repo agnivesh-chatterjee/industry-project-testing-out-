@@ -1,3 +1,4 @@
+from chatbot.chatbot_ui import render_chatbot_launcher
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -97,6 +98,25 @@ expected_expense = float(np.mean(final_expenses))
 lower_bound = float(np.percentile(final_expenses, 5))
 upper_bound = float(np.percentile(final_expenses, 95))
 
+# =========================================================
+# AI CHATBOT INTEGRATION
+# =========================================================
+
+chatbot_context = {
+    "application": "Retirement Expenditure Simulator",
+    "current_age": age,
+    "retirement_age": retirement_age,
+    "years_to_retirement": years_left,
+    "current_monthly_expense": monthly_expense,
+    "mean_inflation": mean_inflation,
+    "inflation_volatility": inflation_volatility,
+    "number_of_simulations": num_simulations,
+    "expected_monthly_expense_at_retirement": expected_expense,
+    "lower_90_percent_interval": lower_bound,
+    "upper_90_percent_interval": upper_bound,
+}
+
+render_chatbot_launcher(chatbot_context)
 st.divider()
 
 tab_expense, tab_assets, tab_re, tab_withdraw, tab_people, tab_about = st.tabs(
